@@ -1,3 +1,7 @@
 FROM alpine:latest
 
-CMD ["echo", "hello world!!!"] docker
+ENV YOUR_NAME "World"
+
+COPY docker-entrypoint.sh /usr/local/bin/
+
+ENTRYPOINT ["docker-entrypoint.sh"]
