@@ -1,7 +1,13 @@
-FROM alpine:latest
+FROM golang:alpine
 
 ENV YOUR_NAME "World"
 
-COPY docker-entrypoint.sh /usr/local/bin/
+WORKDIR /go/src/app
+COPY helloworld.go .
+RUN go get -d -v ./...
+RUN go install -v ./...
+CMD [ "app" ]
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+# Sample with shell script
+# COPY docker-entrypoint.sh /usr/local/bin/
+# ENTRYPOINT ["docker-entrypoint.sh"]
