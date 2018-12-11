@@ -1,4 +1,4 @@
-FROM golang:alpine
+FROM golang:1.11.2-alpine3.8
 
 ENV YOUR_NAME "World"
 

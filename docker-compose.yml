@@ -5,9 +5,6 @@ services:
     image: pfillion/helloworld
     environment:
       YOUR_NAME: Jack
-    command:
-      - ls 
-      - -lh #Only for testing the entrypoint
     deploy:
       restart_policy:
         condition: none
