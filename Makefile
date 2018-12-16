@@ -5,8 +5,8 @@ SHELL = /bin/sh
 .DEFAULT_GOAL := help
 
 # Go parameters
-BIN_FOLDER=./bin
-APP_FOLDER=./cmd/helloworld
+BIN_FOLDER=$(shell pwd)/bin
+APP_FOLDER=$(shell pwd)/cmd/helloworld
 APP_NAME=helloworld
 
 # Docker parameters
@@ -19,7 +19,11 @@ CONTAINER_INSTANCE ?= default
 help: ## Show the Makefile help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
+go-get:
+	go get -v gotest.tools/assert
+
 go-build: ## Build go app
+	make go-get
 	go build -o $(BIN_FOLDER)/$(APP_NAME) -v $(APP_FOLDER)
 
 go-rebuild: ## Rebuild go app
@@ -27,6 +31,7 @@ go-rebuild: ## Rebuild go app
 	make go-build
 
 go-test: ## Test go app
+	make go-get
 	go test -v ./...
 
 go-clean: ## Clean go app
