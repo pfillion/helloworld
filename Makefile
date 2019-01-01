@@ -5,8 +5,9 @@ SHELL = /bin/sh
 .DEFAULT_GOAL := help
 
 # Go parameters
-BIN_FOLDER=$(shell pwd)/bin
-APP_FOLDER=./cmd/helloworld
+ROOT_FOLDER=$(shell pwd)
+BIN_FOLDER=$(ROOT_FOLDER)/bin
+APP_FOLDER=$(ROOT_FOLDER)/cmd/helloworld
 APP_NAME=helloworld
 
 # Docker parameters
@@ -80,12 +81,11 @@ build: ## Build all
 	make go-build
 	make docker-build
 
-rebuild: ## Build all
+rebuild: ## Rebuild all
 	make go-rebuild
 	make docker-rebuild
 
 run: ## Run all
-	make go-run
 	make docker-run
 
 test: ## Run all tests

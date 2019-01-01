@@ -8,7 +8,7 @@ LABEL \
     org.label-schema.build-date=$BUILD_DATE \
     org.label-schema.name="Helloworld" \
     org.label-schema.description="Simple hello world app." \
-    org.label-schema.url="https://cloud.docker.com/repository/docker/pfillion/helloworld" \
+    org.label-schema.url="https://hub.docker.com/r/pfillion/helloworld" \
     org.label-schema.vcs-ref=$VCS_REF \
     org.label-schema.vcs-url="https://github.com/pfillion/helloworld" \
     org.label-schema.vendor="pfillion" \
