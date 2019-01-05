@@ -16,9 +16,15 @@ steps:
   volumes:
   - name: docker_volume
     path: /var/run
+  environment:
+    DOCKER_USERNAME:
+      from_secret: docker_username
+    DOCKER_PASSWORD:
+      from_secret: docker_password
   commands:
   - apk add make
-  - make docker-build run
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+  - make docker-build run docker-push
 
 services:
 - name: docker
