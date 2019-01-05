@@ -1,0 +1,33 @@
+kind: pipeline
+name: main
+
+workspace:
+  base: /go
+  path: src/github.com/pfillion/helloworld
+
+steps:
+- name: test
+  image: golang
+  commands:
+  - make test
+
+- name: build
+  image: docker:dind
+  volumes:
+  - name: docker_volume
+    path: /var/run
+  commands:
+  - apk add make
+  - make docker-build run
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: docker_volume
+    path: /var/run
+
+volumes:
+- name: docker_volume
+  temp: {}
