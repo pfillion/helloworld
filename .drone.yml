@@ -22,7 +22,7 @@ steps:
     DOCKER_PASSWORD:
       from_secret: docker_password
   commands:
-  - apk add make
+  - apk add make git
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
   - make docker-build run docker-push
 
@@ -31,9 +31,6 @@ steps:
   settings:
     urls:
       from_secret: webhook_urls
-  when:
-    local: false
-    event: [ push ]
 
 services:
 - name: docker
