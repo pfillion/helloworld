@@ -14,28 +14,26 @@ steps:
 - name: go-test
   image: golang
   commands:
-  - make go-test go-run
+  - make go-test
 
 - name: docker-build
-  image: docker:dind
+  image: pfillion/drone-dind
   volumes:
   - name: docker_volume
     path: /var/run
   commands:
-  - apk add make git
   - make docker-build
 
 - name: docker-test
-  image: docker:dind
+  image: pfillion/drone-dind
   volumes:
   - name: docker_volume
     path: /var/run
   commands:
-  - apk add make git
   - make docker-run
 
 - name: docker-push
-  image: docker:dind
+  image: pfillion/drone-dind
   volumes:
   - name: docker_volume
     path: /var/run
@@ -45,8 +43,6 @@ steps:
     DOCKER_PASSWORD:
       from_secret: docker_password
   commands:
-  - apk add make git
-  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
   - make docker-push
 
 - name: notify-microbadger
@@ -57,7 +53,7 @@ steps:
 
 services:
 - name: docker
-  image: docker:dind
+  image: pfillion/drone-dind
   privileged: true
   volumes:
   - name: docker_volume

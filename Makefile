@@ -25,10 +25,13 @@ help: ## Show the Makefile help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 go-get:
-	go get -v gotest.tools/assert
+	go get -u -v github.com/golang/lint/golint
+	go get -u -v gotest.tools/assert
 
 go-build: ## Build go app
 	make go-get
+	golint -set_exit_status ./...
+	go vet -v ./...
 	GOOS=${GOOS} GOARCH=${GOARCH} go build -o $(BIN_FOLDER)/$(APP_NAME) -v $(APP_FOLDER)
 
 go-rebuild: ## Rebuild go app
@@ -39,7 +42,7 @@ go-test: ## Test go app
 	go test -cover -v ./...
 
 go-clean: ## Clean go app
-	go clean
+	go clean -cache -testcache
 	rm -f $(BIN_FOLDER)/$(APP_NAME)
 
 go-run: ## Run go app
@@ -60,6 +63,9 @@ docker-rebuild: ## Rebuild the image form Dockerfile
 		--no-cache -t $(NS)/$(IMAGE_NAME):$(VERSION) -f Dockerfile .
 
 docker-push: ## Push the image to a registry
+ifdef DOCKER_USERNAME
+	echo "$(DOCKER_PASSWORD)" | docker login -u "$(DOCKER_USERNAME)" --password-stdin
+endif
 	docker push $(NS)/$(IMAGE_NAME):$(VERSION)
     
 docker-shell: ## Run shell command in the container
