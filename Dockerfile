@@ -1,4 +1,4 @@
-FROM golang:1.11.2-alpine3.8
+FROM alpine:3.8
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -15,7 +15,5 @@ LABEL \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
 
-WORKDIR /go/src
-COPY cmd ./cmd
-RUN go get -d -v ./... && go install -v ./...
-CMD [ "helloworld" ]
+COPY bin /usr/bin
+CMD [ "/usr/bin/helloworld" ]

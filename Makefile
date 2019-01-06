@@ -9,6 +9,8 @@ ROOT_FOLDER=$(shell pwd)
 BIN_FOLDER=$(ROOT_FOLDER)/bin
 APP_FOLDER=$(ROOT_FOLDER)/cmd/helloworld
 APP_NAME=helloworld
+GOOS=linux 
+GOARCH=amd64
 
 # Docker parameters
 NS ?= pfillion
@@ -27,22 +29,20 @@ go-get:
 
 go-build: ## Build go app
 	make go-get
-	go build -o $(BIN_FOLDER)/$(APP_NAME) -v $(APP_FOLDER)
+	GOOS=${GOOS} GOARCH=${GOARCH} go build -o $(BIN_FOLDER)/$(APP_NAME) -v $(APP_FOLDER)
 
 go-rebuild: ## Rebuild go app
 	make go-clean
 	make go-build
 
 go-test: ## Test go app
-	make go-get
-	go test -v ./...
+	go test -cover -v ./...
 
 go-clean: ## Clean go app
 	go clean
 	rm -f $(BIN_FOLDER)/$(APP_NAME)
 
 go-run: ## Run go app
-	make go-build
 	$(BIN_FOLDER)/$(APP_NAME)
 
 docker-build: ## Build the image form Dockerfile

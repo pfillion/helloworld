@@ -6,12 +6,35 @@ workspace:
   path: src/github.com/pfillion/helloworld
 
 steps:
-- name: test
+- name: go-build
   image: golang
   commands:
-  - make test
+  - make go-build
 
-- name: build
+- name: go-test
+  image: golang
+  commands:
+  - make go-test go-run
+
+- name: docker-build
+  image: docker:dind
+  volumes:
+  - name: docker_volume
+    path: /var/run
+  commands:
+  - apk add make git
+  - make docker-build
+
+- name: docker-test
+  image: docker:dind
+  volumes:
+  - name: docker_volume
+    path: /var/run
+  commands:
+  - apk add make git
+  - make docker-run
+
+- name: docker-push
   image: docker:dind
   volumes:
   - name: docker_volume
@@ -24,9 +47,9 @@ steps:
   commands:
   - apk add make git
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-  - make docker-build run docker-push
+  - make docker-push
 
-- name: microbadger
+- name: notify-microbadger
   image: plugins/webhook
   settings:
     urls:
