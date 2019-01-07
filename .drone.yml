@@ -7,12 +7,12 @@ workspace:
 
 steps:
 - name: go-build
-  image: golang
+  image: pfillion/drone-golang
   commands:
   - make go-build
 
 - name: go-test
-  image: golang
+  image: pfillion/drone-golang
   commands:
   - make go-test
 
