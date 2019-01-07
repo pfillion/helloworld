@@ -1,10 +1,13 @@
 package main
 
 import (
+	"bytes"
 	"os"
 	"testing"
 
+	log "github.com/sirupsen/logrus"
 	"gotest.tools/assert"
+	is "gotest.tools/assert/cmp"
 )
 
 func TestMain_sayHello(t *testing.T) {
@@ -60,4 +63,13 @@ func TestMain_sayHello(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestMain_main(t *testing.T) {
+	out := &bytes.Buffer{}
+	log.SetOutput(out)
+
+	main()
+
+	assert.Assert(t, is.Contains(out.String(), "Hello World!!!"))
 }

@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func main() {
-	log.Print(sayHello())
+	log.Println(sayHello())
 }
 
 func sayHello() string {
