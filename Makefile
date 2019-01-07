@@ -26,6 +26,7 @@ help: ## Show the Makefile help.
 
 go-get:
 	go get -u -v github.com/golang/lint/golint
+	go get -u -v github.com/sirupsen/logrus
 	go get -u -v gotest.tools/assert
 
 go-build: ## Build go app
