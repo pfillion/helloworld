@@ -16,4 +16,4 @@ LABEL \
     org.label-schema.schema-version="1.0"
 
 COPY bin /usr/bin
-CMD [ "/usr/bin/helloworld" ]
+ENTRYPOINT [ "helloworld" ]

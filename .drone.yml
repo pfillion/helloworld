@@ -30,7 +30,7 @@ steps:
   - name: docker_volume
     path: /var/run
   commands:
-  - make docker-run
+  - make docker-test
 
 - name: docker-push
   image: pfillion/drone-dind

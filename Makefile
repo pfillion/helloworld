@@ -29,15 +29,12 @@ go-get:
 	go get -u -v github.com/sirupsen/logrus
 	go get -u -v gotest.tools/assert
 
-go-build: ## Build go app
-	make go-get
+go-build: go-get ## Build go app
 	golint -set_exit_status ./...
 	go vet -v ./...
 	GOOS=${GOOS} GOARCH=${GOARCH} go build -o $(BIN_FOLDER)/$(APP_NAME) -v $(APP_FOLDER)
 
-go-rebuild: ## Rebuild go app
-	make go-clean
-	make go-build
+go-rebuild: go-clean go-build ## Rebuild go app
 
 go-test: ## Test go app
 	go test -cover -v ./...
@@ -84,21 +81,22 @@ docker-stop: ## Stop the container
 docker-rm: ## Remove the container
 	docker rm $(CONTAINER_NAME)-$(CONTAINER_INSTANCE)
 
-build: ## Build all
-	make go-build
-	make docker-build
+docker-test: ## Run all tests
+	docker run \
+		--rm \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v $(ROOT_FOLDER)/tests:/tests \
+		gcr.io/gcp-runtimes/container-structure-test:latest \
+			test \
+			--image $(NS)/$(IMAGE_NAME):$(VERSION) \
+			--config /tests/config.yaml
 
-rebuild: ## Rebuild all
-	make go-rebuild
-	make docker-rebuild
+build: go-build docker-build ## Build all
 
-run: ## Run all
-	make docker-run
+rebuild: go-rebuild docker-rebuild ## Rebuild all
 
-test: ## Run all tests
-	make go-test
+run: docker-run ## Run all
 
-release: ## Build and push the image to a registry
-	make build
-	make test
-	make docker-push
+test: go-test docker-test ## Run all tests
+
+release: build test docker-push ## Build and push the image to a registry

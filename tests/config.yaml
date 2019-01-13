@@ -1,0 +1,33 @@
+schemaVersion: "2.0.0"
+
+metadataTest:
+  labels:
+    - key: 'org.label-schema.build-date'
+      value: '.*'
+      isRegex: true
+    - key: 'org.label-schema.vcs-ref'
+      value: '.*'
+      isRegex: true  
+    - key: 'org.label-schema.version'
+      value: '.*'
+      isRegex: true    
+  exposedPorts: []
+  volumes: []
+  entrypoint: ["helloworld"]
+  cmd: []
+  workdir: ""
+
+fileExistenceTests:
+- name: 'helloworld'
+  path: '/usr/bin/helloworld'
+  shouldExist: true
+  permissions: '-rwxr-xr-x'
+  uid: 0
+  gid: 0
+  isExecutableBy: 'group'
+
+commandTests:
+  - name: "helloworld is functional"
+    command: "helloworld"
+    expectedError: [".*\"Hello World!!!\".*"]
+    exitCode: 0
