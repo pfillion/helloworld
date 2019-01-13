@@ -81,7 +81,7 @@ docker-stop: ## Stop the container
 docker-rm: ## Remove the container
 	docker rm $(CONTAINER_NAME)-$(CONTAINER_INSTANCE)
 
-docker-test: ## Run all tests
+docker-test: ## Run docker container tests
 	docker run \
 		--rm \
 		-v /var/run/docker.sock:/var/run/docker.sock \
