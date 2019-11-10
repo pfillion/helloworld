@@ -22,6 +22,7 @@ steps:
   - name: docker_volume
     path: /var/run
   commands:
+  - sleep 10 # give docker enough time to start
   - make docker-build
 
 - name: docker-test

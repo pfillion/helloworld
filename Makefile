@@ -25,9 +25,9 @@ help: ## Show the Makefile help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 go-get:
-	go get -u -v github.com/golang/lint/golint
+	go get -u -v golang.org/x/lint/golint
 	go get -u -v github.com/sirupsen/logrus
-	go get -u -v gotest.tools/assert
+	go get -u -v gotest.tools/v3
 
 go-build: go-get ## Build go app
 	golint -set_exit_status ./...
