@@ -1,19 +1,21 @@
-FROM alpine:3.10
+FROM alpine:3.11.3
 
-# Build-time metadata as defined at http://label-schema.org
-ARG BUILD_DATE
-ARG VCS_REF
-ARG VERSION
+# Build-time metadata as defined at https://github.com/opencontainers/image-spec
+ARG DATE
+ARG CURRENT_VERSION_MICRO
+ARG COMMIT
+ARG AUTHOR
 LABEL \
-    org.label-schema.build-date=$BUILD_DATE \
-    org.label-schema.name="Helloworld" \
-    org.label-schema.description="Simple hello world app." \
-    org.label-schema.url="https://hub.docker.com/r/pfillion/helloworld" \
-    org.label-schema.vcs-ref=$VCS_REF \
-    org.label-schema.vcs-url="https://github.com/pfillion/helloworld" \
-    org.label-schema.vendor="pfillion" \
-    org.label-schema.version=$VERSION \
-    org.label-schema.schema-version="1.0"
+    org.opencontainers.image.created=$DATE \
+    org.opencontainers.image.url="https://hub.docker.com/r/pfillion/helloworld" \
+    org.opencontainers.image.source="https://github.com/pfillion/helloworld" \
+    org.opencontainers.image.version=$CURRENT_VERSION_MICRO \
+    org.opencontainers.image.revision=$COMMIT \
+    org.opencontainers.image.vendor="pfillion" \
+    org.opencontainers.image.title="Helloworld" \
+    org.opencontainers.image.description="Simple hello world app." \
+    org.opencontainers.image.authors=$AUTHOR \
+    org.opencontainers.image.licenses="MIT"
 
 COPY bin /usr/bin
 ENTRYPOINT [ "helloworld" ]

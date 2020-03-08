@@ -13,3 +13,11 @@ The goal being to test different concepts like:
 - Go programming language including testing and project structure
 - Using Drone.io and Makefile for builds, tests and more
 - Create a Docker image and install the Go app
+
+## Authors
+
+- [pfillion](https://github.com/pfillion)
+
+## License
+
+MIT
