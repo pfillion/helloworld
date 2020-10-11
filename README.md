@@ -7,7 +7,7 @@
 [![GitHub last commit](https://img.shields.io/github/last-commit/pfillion/helloworld?logo=github)](https://github.com/pfillion/helloworld "GitHub projet")
 
 [![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/pfillion/helloworld/latest?logo=docker)](https://hub.docker.com/r/pfillion/helloworld "Docker Hub Repository")
-[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/pfillion/helloworld/latest?logo=docker)](https://microbadger.com/images/pfillion/helloworld "Get your own commit badge on microbadger.com")
+[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/pfillion/helloworld/latest?logo=docker)](https://hub.docker.com/r/pfillion/helloworld "Docker Hub Repository")
 [![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/pfillion/helloworld/latest?logo=docker)](https://microbadger.com/images/pfillion/helloworld "Get your own commit badge on microbadger.com")
 
 Simple hello world app.

@@ -47,6 +47,16 @@ CONTAINER_INSTANCE ?= default
 help: ## Show the Makefile help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
+version: ## Show all versionning infos
+	@echo CURRENT_VERSION_MICRO="$(CURRENT_VERSION_MICRO)"
+	@echo CURRENT_VERSION_MINOR="$(CURRENT_VERSION_MINOR)"
+	@echo CURRENT_VERSION_MAJOR="$(CURRENT_VERSION_MAJOR)"
+	@echo DATE="$(DATE)"
+	@echo COMMIT="$(COMMIT)"
+	@echo AUTHOR="$(AUTHOR)"
+	@echo DESCRIBE="$(DESCRIBE)"
+	@echo COMMITS_SINCE_TAG="$(COMMITS_SINCE_TAG)"
+
 go-get:
 	go get -u -v golang.org/x/lint/golint
 	go get -u -v github.com/sirupsen/logrus
