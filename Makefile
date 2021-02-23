@@ -57,12 +57,10 @@ version: ## Show all versionning infos
 	@echo DESCRIBE="$(DESCRIBE)"
 	@echo COMMITS_SINCE_TAG="$(COMMITS_SINCE_TAG)"
 
-go-get:
-	go get -u -v golang.org/x/lint/golint
-	go get -u -v github.com/sirupsen/logrus
-	go get -u -v gotest.tools/v3
+go-install:
+	GO111MODULE=off go get -u -v golang.org/x/lint/golint
 
-go-build: go-get ## Build go app
+go-build: ## Build go app
 	golint -set_exit_status ./...
 	go vet -v ./...
 	GOOS=${GOOS} GOARCH=${GOARCH} go build -o $(BIN_FOLDER)/$(APP_NAME) -v $(APP_FOLDER)
@@ -76,7 +74,7 @@ go-clean: ## Clean go app
 	go clean -cache -testcache
 	rm -f $(BIN_FOLDER)/$(APP_NAME)
 
-go-mod-clean: ## Run go module cleanup
+go-update-mod: ## Update go module
 	go mod tidy -v
 
 go-run: ## Run go app
