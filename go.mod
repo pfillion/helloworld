@@ -3,8 +3,8 @@ module github.com/pfillion/helloworld
 go 1.15
 
 require (
-	github.com/sirupsen/logrus v1.7.0
-	golang.org/x/sys v0.0.0-20201009025420-dfb3f7c4e634 // indirect
-	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
+	github.com/magefile/mage v1.11.0 // indirect
+	github.com/sirupsen/logrus v1.8.0
+	golang.org/x/sys v0.0.0-20210227040730-b0d1d43c014d // indirect
 	gotest.tools/v3 v3.0.3
 )

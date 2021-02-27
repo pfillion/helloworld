@@ -58,7 +58,7 @@ version: ## Show all versionning infos
 	@echo COMMITS_SINCE_TAG="$(COMMITS_SINCE_TAG)"
 
 go-install:
-	GO111MODULE=off go get -u -v golang.org/x/lint/golint
+	go install golang.org/x/lint/golint@latest
 
 go-build: ## Build go app
 	golint -set_exit_status ./...
@@ -75,6 +75,7 @@ go-clean: ## Clean go app
 	rm -f $(BIN_FOLDER)/$(APP_NAME)
 
 go-update-mod: ## Update go module
+	go get -u -v ./...
 	go mod tidy -v
 
 go-run: ## Run go app
