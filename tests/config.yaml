@@ -42,7 +42,7 @@ fileExistenceTests:
 - name: 'helloworld'
   path: '/usr/bin/helloworld'
   shouldExist: true
-  permissions: '-rwxr-xr-x'
+  permissions: '-rwxrwxr-x'
   uid: 0
   gid: 0
   isExecutableBy: 'group'
