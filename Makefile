@@ -66,6 +66,7 @@ go-build: ## Build go app
 	golint -set_exit_status ./...
 	go vet -v ./...
 	GOOS=${GOOS} GOARCH=${GOARCH} go build -o $(BIN_FOLDER)/$(APP_NAME) -v $(APP_FOLDER)
+	chmod 0755 $(BIN_FOLDER)/$(APP_NAME)
 
 go-rebuild: go-clean go-build ## Rebuild go app
 
