@@ -11,7 +11,7 @@ COMMITS_SINCE_TAG  := $(word 2,$(DESCRIBE_PARTS))
 
 VERSION            := $(subst v,,$(VERSION_TAG))
 VERSION_PARTS      := $(subst ., ,$(VERSION))
-VERSION_ALPINE     := 3.20
+VERSION_ALPINE     := 3.22
 
 MAJOR              := $(word 1,$(VERSION_PARTS))
 MINOR              := $(word 2,$(VERSION_PARTS))
@@ -59,7 +59,7 @@ version: ## Show all versionning infos
 	@echo DESCRIBE="$(DESCRIBE)"
 	@echo COMMITS_SINCE_TAG="$(COMMITS_SINCE_TAG)"
 
-go-install:
+go-install: ## Install go tools
 	go install golang.org/x/lint/golint@latest
 
 go-build: ## Build go app
@@ -78,6 +78,7 @@ go-clean: ## Clean go app
 	rm -f $(BIN_FOLDER)/$(APP_NAME)
 
 go-update-mod: ## Update go module
+	go get go
 	go get -u -v ./...
 	go mod tidy -v
 
