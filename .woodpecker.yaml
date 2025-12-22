@@ -5,27 +5,33 @@ workspace:
   base: /go
   path: src/github.com/pfillion/helloworld
 
+clone:
+  - name: git
+    image: woodpeckerci/plugin-git
+    settings:
+      tags: true
+
 steps:
-- name: go-build
-  image: pfillion/drone-golang
-  commands:
-    - make go-install go-build
+  - name: go-build
+    image: pfillion/drone-golang
+    commands:
+      - make go-install go-build
 
-- name: go-test
-  image: pfillion/drone-golang
-  commands:
-    - make go-test
+  - name: go-test
+    image: pfillion/drone-golang
+    commands:
+      - make go-test
 
-- name: docker-build
-  image: pfillion/drone-dind
-  commands:
-    - make docker-build
-  volumes: 
-    - /var/run:/var/run
+  - name: docker-build
+    image: pfillion/drone-dind
+    commands:
+      - make docker-build
+    volumes: 
+      - /var/run:/var/run
 
-- name: docker-test
-  image: pfillion/drone-dind
-  commands:
-    - make docker-test
-  volumes: 
-    - /var/run:/var/run
+  - name: docker-test
+    image: pfillion/drone-dind
+    commands:
+      - make docker-test
+    volumes: 
+      - /var/run:/var/run
