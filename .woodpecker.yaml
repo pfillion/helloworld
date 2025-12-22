@@ -35,3 +35,10 @@ steps:
       - make docker-test
     volumes: 
       - /var/run:/var/run
+
+  - name: notify-goreportcard
+    image: appropriate/curl
+    commands:
+      - curl -sS -d "repo=github.com/pfillion/helloworld" https://goreportcard.com/checks
+    when:
+      - evaluate: 'MODE_LOCAL != "true"'      

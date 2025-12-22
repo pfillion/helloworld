@@ -150,4 +150,7 @@ run: docker-run ## Run all
 
 test: go-test docker-test ## Run all tests
 
+test-ci: ## Run CI pipeline locally
+	woodpecker-cli exec --local --repo-trusted-volumes=true --env=MODE_LOCAL=true
+
 release: build test docker-push ## Build and push the image to a registry
