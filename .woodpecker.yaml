@@ -36,9 +36,23 @@ steps:
     volumes: 
       - /var/run:/var/run
 
+  - name: docker-push
+    image: pfillion/drone-dind
+    environment:
+      DOCKER_USERNAME:
+        from_secret: docker_username
+      DOCKER_PASSWORD:
+        from_secret: docker_password
+    commands:
+      - make docker-push
+    volumes: 
+      - /var/run:/var/run      
+    when:
+      - evaluate: 'MODE_LOCAL != "true"'
+
   - name: notify-goreportcard
     image: appropriate/curl
     commands:
       - curl -sS -d "repo=github.com/pfillion/helloworld" https://goreportcard.com/checks
     when:
-      - evaluate: 'MODE_LOCAL != "true"'      
+      - evaluate: 'MODE_LOCAL != "true"'
