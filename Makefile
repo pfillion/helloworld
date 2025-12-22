@@ -2,6 +2,10 @@ SHELL = /bin/sh
 .PHONY: help
 .DEFAULT_GOAL := help
 
+ifeq ($(MODE_LOCAL),true)
+	GIT_CONFIG_GLOBAL := $(shell git config --global --add safe.directory /go/src/github.com/pfillion/helloworld > /dev/null)
+endif
+
 # Version
 DESCRIBE           := $(shell git describe --match "v*" --always --tags)
 DESCRIBE_PARTS     := $(subst -, ,$(DESCRIBE))
