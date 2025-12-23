@@ -1,6 +1,6 @@
 # helloworld
 
-[![Build Status](https://drone.pfillion.com/api/badges/pfillion/helloworld/status.svg?branch=master)](https://drone.pfillion.com/pfillion/helloworld)
+[![status-badge](https://woodpecker.pfillion.com/api/badges/1/status.svg)](https://woodpecker.pfillion.com/repos/1)
 [![Go Report Card](https://goreportcard.com/badge/github.com/pfillion/helloworld)](https://goreportcard.com/report/github.com/pfillion/helloworld)
 [![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/pfillion/helloworld)](https://golang.org/ "The Go Programming Language")
 ![GitHub](https://img.shields.io/github/license/pfillion/helloworld)
