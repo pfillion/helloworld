@@ -36,6 +36,7 @@ COMMIT             := $(shell git rev-parse HEAD)
 AUTHOR             := $(firstword $(subst @, ,$(shell git show --format="%aE" $(COMMIT))))
 
 # Go parameters
+GO_VERSION := 1.24.4
 ROOT_FOLDER=$(shell pwd)
 BIN_FOLDER=$(ROOT_FOLDER)/bin
 APP_FOLDER=$(ROOT_FOLDER)/cmd/helloworld
@@ -82,7 +83,7 @@ go-clean: ## Clean go app
 	rm -f $(BIN_FOLDER)/$(APP_NAME)
 
 go-update-mod: ## Update go module
-	go get go
+	go get go@$(GO_VERSION)
 	go get -u -v ./...
 	go mod tidy -v
 
