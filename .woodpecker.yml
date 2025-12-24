@@ -13,31 +13,31 @@ clone:
 
 steps:
   - name: go-build
-    image: pfillion/drone-golang
+    image: pfillion/golang
     commands:
       - make go-install go-build
 
   - name: go-test
-    image: pfillion/drone-golang
+    image: pfillion/golang
     commands:
       - make go-test
 
   - name: docker-build
-    image: pfillion/drone-dind
+    image: pfillion/dind
     commands:
       - make docker-build
     volumes: 
-      - /var/run:/var/run
+      - /var/run/docker.sock:/var/run/docker.sock
 
   - name: docker-test
-    image: pfillion/drone-dind
+    image: pfillion/dind
     commands:
       - make docker-test
     volumes: 
-      - /var/run:/var/run
+      - /var/run/docker.sock:/var/run/docker.sock
 
   - name: docker-push
-    image: pfillion/drone-dind
+    image: pfillion/dind
     environment:
       DOCKER_USERNAME:
         from_secret: docker_username
@@ -46,7 +46,7 @@ steps:
     commands:
       - make docker-push
     volumes: 
-      - /var/run:/var/run      
+      - /var/run/docker.sock:/var/run/docker.sock
     when:
       - evaluate: 'MODE_LOCAL != "true"'
 
