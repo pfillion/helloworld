@@ -15,7 +15,7 @@ COMMITS_SINCE_TAG  := $(word 2,$(DESCRIBE_PARTS))
 
 VERSION            := $(subst v,,$(VERSION_TAG))
 VERSION_PARTS      := $(subst ., ,$(VERSION))
-VERSION_ALPINE     := 3.22
+VERSION_ALPINE     := 3.23
 
 MAJOR              := $(word 1,$(VERSION_PARTS))
 MINOR              := $(word 2,$(VERSION_PARTS))
@@ -36,7 +36,6 @@ COMMIT             := $(shell git rev-parse HEAD)
 AUTHOR             := $(firstword $(subst @, ,$(shell git show --format="%aE" $(COMMIT))))
 
 # Go parameters
-GO_VERSION := 1.24.4
 ROOT_FOLDER=$(shell pwd)
 BIN_FOLDER=$(ROOT_FOLDER)/bin
 APP_FOLDER=$(ROOT_FOLDER)/cmd/helloworld
@@ -79,11 +78,11 @@ go-test: ## Test go app
 	go test -cover -v ./...
 
 go-clean: ## Clean go app
-	go clean -cache -testcache
+	go clean -cache -testcache -fuzzcache
 	rm -f $(BIN_FOLDER)/$(APP_NAME)
 
 go-update-mod: ## Update go module
-	go get go@$(GO_VERSION)
+	go clean -modcache
 	go get -u -v ./...
 	go mod tidy -v
 
